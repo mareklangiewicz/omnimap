@@ -2,8 +2,9 @@ import java.io.FileInputStream
 import java.util.Properties
 
 plugins {
+    // alias(libs.plugins.org.jetbrains.kotlin.android)
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.android.application)
-    kotlin("android")
     id("dagger.hilt.android.plugin")
     alias(libs.plugins.ksp)
     alias(libs.plugins.apollo)
@@ -83,15 +84,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
-    }
     buildFeatures {
         compose = true
         buildConfig = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.androidxComposeCompiler.get()
     }
     packaging {
         resources {
@@ -175,9 +170,9 @@ dependencies {
 
 apollo {
     service("service") {
-        outputDirConnection {
-            connectToKotlinSourceSet("main")
-        }
+        // outputDirConnection {
+        //     connectToKotlinSourceSet("main")
+        // }
         packageName.set("app.omnivore.omnivore.graphql.generated")
     }
 }
